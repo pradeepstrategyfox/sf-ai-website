@@ -880,7 +880,7 @@ code {
 }
 
 .product_card li::before {
-  content: "â";
+  content: "✓";
   margin-right: 10px;
   color: #e9e4f5;
 }
@@ -958,7 +958,7 @@ code {
 }
 
 .use_grid li::before {
-  content: "â¢";
+  content: "•";
   color: #c875ff;
   margin-right: 10px;
 }
