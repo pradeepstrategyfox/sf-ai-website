@@ -129,6 +129,17 @@ strong {
   line-height: 1;
 }
 
+.brand_logo {
+  display: block;
+  height: 30px;
+  width: auto;
+}
+
+.brand_sym {
+  display: none;
+  height: 34px;
+}
+
 .brand_mark {
   position: relative;
   width: 35px;
@@ -1601,9 +1612,14 @@ h2 {
   .site_header {
     height: 60px;
   }
-  .brand_word,
   .ghost_link {
     display: none;
+  }
+  .brand_full {
+    display: none;
+  }
+  .brand_sym {
+    display: block;
   }
   .diagnosis,
   .demos,

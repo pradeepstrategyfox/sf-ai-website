@@ -111,7 +111,7 @@
   var msgs = {
     0: "Tap the cards below 👇",
     low: "A few cracks. We seal them fast.",
-    mid: "This is the norm — and exactly our zone.",
+    mid: "This is the norm, and exactly our zone.",
     high: "You're not alone. We close every one of these."
   };
   function updateTally() {
@@ -202,7 +202,7 @@
   var waSteps = [
     { cls: "bubble_msg me", html: "stock left on the lavender candle?", delay: 700 },
     { typing: 900 },
-    { cls: "bubble_msg them", html: "<b>142 units</b> in stock 🕯️<br>Selling ~18/day — ~8 days of cover left.", delay: 1300 },
+    { cls: "bubble_msg them", html: "<b>142 units</b> in stock 🕯️<br>Selling about 18 a day, roughly 8 days of cover left.", delay: 1300 },
     { cls: "bubble_msg me", html: "today's sales + ad spend?", delay: 700 },
     { typing: 900 },
     { cls: "bubble_msg them", html: "Sales: <b>₹1,84,200</b> (62 orders)<br>Ad spend: <b>₹38,400</b> · ROAS <b>4.8x</b> ✅", delay: 1400 },
@@ -216,7 +216,7 @@
   var agentSteps = [
     { cls: "line cust", html: "Hi, is the serum okay for oily skin?", delay: 800 },
     { typing: 1000 },
-    { cls: "line ai", html: "Absolutely! Our Niacinamide serum is oil-free and great for oily, acne-prone skin. Want me to suggest a simple morning routine?<small>AI Agent · 0.6s</small>", delay: 1600 },
+    { cls: "line ai", html: "Absolutely! Our Niacinamide serum is oil free and great for oily, acne prone skin. Want me to suggest a simple morning routine?<small>AI Agent · 0.6s</small>", delay: 1600 },
     { cls: "line cust", html: "Yes please, and any offer?", delay: 800 },
     { typing: 1000 },
     { cls: "line ai", html: "Pair it with the gentle cleanser and you get 15% off the duo. Shall I place the order to your usual address?<small>AI Agent · upsell</small>", delay: 1700 },
@@ -261,7 +261,7 @@
   var dataSets = [
     {
       q: "Best seller in Chennai yesterday?",
-      kpi: "Sweet Karam Coffee — Filter Decoction",
+      kpi: "Sweet Karam Coffee · Filter Decoction",
       sub: "Top product · Chennai · yesterday",
       bars: [
         ["Filter Decoction", 100, "₹71,400"],
@@ -272,7 +272,7 @@
     },
     {
       q: "Which ad set has the best ROAS?",
-      kpi: "Meta · Lookalike 1% — Skincare",
+      kpi: "Meta · Lookalike 1% · Skincare",
       sub: "Top performing ad set · last 7 days",
       bars: [
         ["LAL 1% Skincare", 100, "6.4x"],
@@ -282,14 +282,14 @@
       ]
     },
     {
-      q: "What's my repeat-customer rate?",
+      q: "What's my repeat customer rate?",
       kpi: "38% of revenue from repeat buyers",
-      sub: "Rolling 90-day cohort",
+      sub: "Rolling 90 day cohort",
       bars: [
         ["Repeat buyers", 38, "38%"],
-        ["First-time", 62, "62%"],
+        ["First time", 62, "62%"],
         ["Subscribed", 21, "21%"],
-        ["Win-back won", 12, "12%"]
+        ["Reactivated", 12, "12%"]
       ]
     }
   ];
