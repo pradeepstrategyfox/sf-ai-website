@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800&display=swap" rel="stylesheet" />
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      html, body { width: 1200px; height: 630px; overflow: hidden; }
+      .card {
+        width: 1200px; height: 630px;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        gap: 34px;
+        font-family: Inter, system-ui, sans-serif;
+        background:
+          radial-gradient(circle at 22% 18%, rgba(166,69,220,0.30), transparent 38%),
+          radial-gradient(circle at 82% 82%, rgba(126,220,229,0.18), transparent 40%),
+          #0a0a14;
+      }
+      .card img { width: 760px; height: auto; }
+      .tag {
+        font-size: 38px; font-weight: 700; letter-spacing: 0.01em;
+        background: linear-gradient(100deg, #79dce8 0%, #e6d479 29%, #d75980 57%, #a645dc 75%, #5746ff 100%);
+        -webkit-background-clip: text; background-clip: text; color: transparent;
+        display: inline-block; padding: 0 0.2em 0.12em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <img src="logo.png" alt="Strategy Fox" />
+      <div class="tag">Your Technology and Marketing Partner</div>
+    </div>
+  </body>
+</html>

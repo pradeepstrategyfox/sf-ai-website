@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+      * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; margin: 0; padding: 0; }
+      :root {
+        --bg: #010106; --muted: #aba9b8; --quiet: #807e89;
+        --line: rgba(255,255,255,0.11); --panel: rgba(255,255,255,0.04);
+        --grad: linear-gradient(100deg, #79dce8 0%, #e6d479 29%, #d75980 57%, #a645dc 75%, #5746ff 100%);
+      }
+      @page { size: A4; margin: 0; }
+      html, body { background: var(--bg); }
+      body { font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif; color: #fff; -webkit-font-smoothing: antialiased; }
+      .page {
+        width: 210mm; height: 297mm; padding: 14mm 13mm 12mm;
+        background:
+          radial-gradient(circle at 14% 6%, rgba(166,69,220,0.18), transparent 26%),
+          radial-gradient(circle at 92% 4%, rgba(126,220,229,0.12), transparent 22%),
+          radial-gradient(circle at 96% 97%, rgba(215,86,131,0.12), transparent 30%),
+          var(--bg);
+        display: flex; flex-direction: column; overflow: hidden;
+      }
+      .grad { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; padding-right: 0.12em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+      .top { display: flex; align-items: center; justify-content: space-between; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+      .top img { height: 32px; }
+      .top .t { font-size: 13px; font-weight: 800; letter-spacing: 0.2em; color: #bf69ee; text-transform: uppercase; }
+
+      .hero { margin-top: 14px; padding: 13px 15px; border: 1px solid rgba(166,69,220,0.32); border-radius: 12px; background: linear-gradient(180deg, rgba(166,69,220,0.13), rgba(255,255,255,0.02)); }
+      .hero .lbl { font-size: 9.5px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #bf69ee; margin-bottom: 5px; }
+      .hero .line { font-size: 17px; font-weight: 760; line-height: 1.25; }
+
+      .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 13px; }
+      .card { border: 1px solid var(--line); border-radius: 11px; background: var(--panel); padding: 13px 14px; }
+      .card.full { grid-column: span 2; }
+      .h { font-size: 10px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: #bf69ee; margin-bottom: 9px; }
+
+      .pitch p { font-size: 10.3px; line-height: 1.5; color: var(--muted); }
+      .pitch p + p { margin-top: 8px; }
+      .pitch .tg { color: #fff; font-weight: 700; }
+      .pitch b { color: #f1ecf8; font-weight: 600; }
+
+      ul { list-style: none; }
+      li { font-size: 10.2px; line-height: 1.45; color: var(--muted); padding: 4px 0 4px 15px; position: relative; }
+      li + li { border-top: 1px solid rgba(255,255,255,0.05); }
+      li::before { content: ""; position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 999px; background: #a645dc; }
+      li b { color: #f1ecf8; font-weight: 650; }
+
+      .ben { width: 100%; border-collapse: collapse; }
+      .ben td { font-size: 10px; padding: 5px 6px; vertical-align: top; border-top: 1px solid rgba(255,255,255,0.06); line-height: 1.4; }
+      .ben tr:first-child td { border-top: 0; }
+      .ben .a { color: var(--quiet); width: 38%; }
+      .ben .b { color: #f1ecf8; font-weight: 600; }
+      .ben .ar { color: #9a7bf0; width: 14px; text-align: center; }
+
+      .obj b { color: #fff; }
+      .obj .q { font-size: 10px; color: #e7c4fb; font-weight: 700; }
+      .obj .r { font-size: 9.8px; color: var(--muted); line-height: 1.42; margin-bottom: 7px; display: block; }
+
+      .close { font-size: 10.6px; line-height: 1.5; color: #ece8f4; }
+      .close .big { font-size: 12px; font-weight: 700; color: #fff; }
+
+      .bites { display: flex; flex-wrap: wrap; gap: 7px; }
+      .bites span { font-size: 9.6px; font-weight: 650; padding: 6px 11px; border-radius: 999px; border: 1px solid rgba(166,69,220,0.4); background: rgba(166,69,220,0.13); color: #ecccfc; }
+
+      .foot { margin-top: auto; padding-top: 11px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
+      .foot .c { font-size: 10px; color: #d8d4e2; } .foot .c b { color: #fff; }
+      .foot .w { font-size: 10.5px; font-weight: 800; }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="top">
+        <img src="logo.png" alt="Strategy Fox" />
+        <div class="t">Founder's Pitch Cheat Sheet</div>
+      </div>
+
+      <div class="hero">
+        <div class="lbl">Say this first</div>
+        <div class="line">"We're not an agency. We're a <span class="grad">technology company</span> that grows D2C brands."</div>
+      </div>
+
+      <div class="cols">
+        <div class="card pitch">
+          <div class="h">The pitch</div>
+          <p><span class="tg">10 seconds:</span> "We help D2C brands grow revenue or cut costs using AI and data, and we build the tech ourselves, so we go well beyond a normal agency."</p>
+          <p><span class="tg">30 seconds:</span> "Most brands don't have a marketing problem, they have a systems problem. We're an Ex Amazon, Duke trained founder's team of engineers and marketers. We do web, performance marketing, marketplaces and social, then build AI agents, unify your data and add 3D commerce on top. <b>150+ brands, including Jiiva and Nivetha Pethuraj.</b>"</p>
+        </div>
+
+        <div class="card">
+          <div class="h">Open with a question</div>
+          <ul>
+            <li>"If I asked your best selling product in Chennai yesterday, could you tell me in 10 seconds?"</li>
+            <li>"Who answers your customer calls and DMs right now?"</li>
+            <li>"Does your store look like the other 400,000 Shopify stores, or make people stop?"</li>
+            <li><b>When they pause or laugh, that's your wedge.</b></li>
+          </ul>
+        </div>
+
+        <div class="card full">
+          <div class="h">Always say the benefit, not the service</div>
+          <table class="ben">
+            <tr><td class="a">Performance marketing</td><td class="ar">&rarr;</td><td class="b">More sales for less ad spend. 3.8x ROAS on managed spend.</td></tr>
+            <tr><td class="a">AI agents</td><td class="ar">&rarr;</td><td class="b">Calls and DMs answered 24/7 by an agent customers can't tell from a human.</td></tr>
+            <tr><td class="a">Unified data</td><td class="ar">&rarr;</td><td class="b">Any number, by city, product or day, answered in seconds, not a meeting.</td></tr>
+            <tr><td class="a">Web development</td><td class="ar">&rarr;</td><td class="b">A store people play with: 3D, tools and games, so browsers become buyers.</td></tr>
+            <tr><td class="a">Always ahead</td><td class="ar">&rarr;</td><td class="b">When Google ships Universal Cart this year, you'll already be set up for it.</td></tr>
+          </table>
+        </div>
+
+        <div class="card obj">
+          <div class="h">Handle objections</div>
+          <span class="q">"We already have an agency."</span>
+          <span class="r">Keep them for the basics. We're the tech layer they can't build: AI agents, data, custom tools. We often work alongside agencies.</span>
+          <span class="q">"Too expensive / we're small."</span>
+          <span class="r">Big or small, we start with one fix that pays for itself, usually lower cost per order or hours saved.</span>
+          <span class="q">"AI sounds complicated."</span>
+          <span class="r">You don't touch it. We built a 50+ founder a custom CRM in minutes. Today he runs it himself.</span>
+        </div>
+
+        <div class="card">
+          <div class="h">Close with a small yes</div>
+          <div class="close">
+            <span class="big">"Give me 20 minutes next week, I'll pull your category and show you the easy wins. Tuesday or Thursday?"</span>
+            <br /><br />
+            No pressure version: "Scan this and I'll send you a free one page teardown of your store and where you're losing money."
+          </div>
+        </div>
+
+        <div class="card full">
+          <div class="h">Soundbites to repeat</div>
+          <div class="bites">
+            <span>We don't just manage brands. We fix what's broken.</span>
+            <span>Not a marketing problem, a systems problem.</span>
+            <span>We bring the tech. You get the results.</span>
+            <span>You don't have to break your head.</span>
+            <span>Grow revenue, cut costs, or both.</span>
+            <span>Ready for what's next, before your competitors notice.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="foot">
+        <div class="c"><b>pradeep@strategyfox.in</b> &nbsp;&middot;&nbsp; +91 89030 04922</div>
+        <div class="w grad">strategyfox.in &middot; shackit.com</div>
+      </div>
+    </div>
+  </body>
+</html>
