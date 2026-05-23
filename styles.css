@@ -382,6 +382,11 @@ h2 span,
 }
 
 /* rotator */
+.rotator_line {
+  display: block;
+  min-height: 2.2em;
+}
+
 .rotator {
   display: inline-block;
   position: relative;
@@ -878,10 +883,12 @@ h2 {
 }
 
 .phone_body {
-  min-height: 360px;
+  height: 380px;
+  overflow: hidden;
   padding: 18px 16px;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   gap: 10px;
   background:
     radial-gradient(circle at 20% 10%, rgba(37,211,102,0.05), transparent 40%),
@@ -989,10 +996,12 @@ h2 {
 }
 
 .chat_body {
-  min-height: 320px;
+  height: 360px;
+  overflow: hidden;
   padding: 22px;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   gap: 12px;
 }
 
@@ -1057,7 +1066,8 @@ h2 {
 
 .data_answer {
   padding: 24px 22px;
-  min-height: 220px;
+  height: 290px;
+  overflow: hidden;
 }
 
 .data_kpi b {
@@ -1560,39 +1570,48 @@ h2 {
 .marquee_label {
   text-align: center;
   color: var(--quiet);
-  font-size: 14px;
-  margin-bottom: 22px;
+  font-size: 15px;
+  margin-bottom: 40px;
 }
 
-.marquee {
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 56px;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+.logo_wall {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto 56px;
 }
 
-.marquee_track {
-  display: flex;
-  gap: 48px;
-  width: max-content;
-  animation: scrollx 32s linear infinite;
+.logo_cell {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 3 / 2;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255,255,255,0.025);
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
 }
 
-.marquee:hover .marquee_track {
-  animation-play-state: paused;
+.logo_cell:hover {
+  border-color: rgba(166,69,220,0.4);
+  background: rgba(255,255,255,0.05);
+  transform: translateY(-3px);
 }
 
-.marquee_track span {
-  color: #9b9aa5;
-  font-size: 20px;
-  font-weight: 640;
-  white-space: nowrap;
-  opacity: 0.7;
+.logo_cell img {
+  max-width: 100%;
+  max-height: 54px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.62;
+  transition: opacity 0.25s ease;
 }
 
-@keyframes scrollx {
-  to { transform: translateX(-50%); }
+.logo_cell:hover img {
+  opacity: 1;
 }
 
 .quote_grid {
@@ -2137,6 +2156,9 @@ h2 {
   .quote_grid {
     grid-template-columns: 1fr;
   }
+  .logo_wall {
+    grid-template-columns: repeat(3, 1fr);
+  }
   .footer_grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -2177,6 +2199,13 @@ h2 {
   .product_grid,
   .edge_grid {
     grid-template-columns: 1fr;
+  }
+  .logo_wall {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .logo_cell img {
+    max-height: 46px;
   }
   .form_row3,
   .form_row2 {

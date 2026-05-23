@@ -104,7 +104,7 @@
   /* ---------- hero rotator ---------- */
   var words = [
     "scattered data", "missed sales calls", "invisible presence",
-    "a boring Shopify store", "guesswork marketing", "no real community"
+    "a generic store", "guesswork marketing", "no real community"
   ];
   var rotWrap = document.querySelector(".rotator");
   if (rotWrap && !reduceMotion) {
@@ -116,7 +116,7 @@
         ri = (ri + 1) % words.length;
         var span = document.createElement("span");
         span.className = "rotator_word";
-        span.textContent = words[ri];
+        span.textContent = words[ri] + "?";
         rotWrap.innerHTML = "";
         rotWrap.appendChild(span);
       }, 340);
