@@ -375,6 +375,28 @@
     });
   });
 
+  /* ---------- edge accordion ---------- */
+  var edgeAcc = document.getElementById("edgeAcc");
+  if (edgeAcc) {
+    var accItems = [].slice.call(edgeAcc.querySelectorAll(".acc_item"));
+    accItems.forEach(function (item) {
+      var q = item.querySelector(".acc_q");
+      if (!q) return;
+      q.addEventListener("click", function () {
+        var isOpen = item.classList.contains("open");
+        accItems.forEach(function (it) {
+          it.classList.remove("open");
+          var b = it.querySelector(".acc_q");
+          if (b) b.setAttribute("aria-expanded", "false");
+        });
+        if (!isOpen) {
+          item.classList.add("open");
+          q.setAttribute("aria-expanded", "true");
+        }
+      });
+    });
+  }
+
   /* ---------- 3D tilt ---------- */
   if (window.matchMedia("(pointer: fine)").matches && !reduceMotion) {
     document.querySelectorAll(".tilt").forEach(function (el) {
