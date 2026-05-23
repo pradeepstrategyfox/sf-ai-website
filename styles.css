@@ -1586,7 +1586,7 @@ h2 {
   display: grid;
   place-items: center;
   aspect-ratio: 3 / 2;
-  padding: 22px;
+  padding: 16px 18px;
   border: 1px solid var(--line);
   border-radius: 14px;
   background: rgba(255,255,255,0.025);
@@ -1601,7 +1601,7 @@ h2 {
 
 .logo_cell img {
   max-width: 100%;
-  max-height: 54px;
+  max-height: 78px;
   width: auto;
   height: auto;
   object-fit: contain;
@@ -2205,7 +2205,7 @@ h2 {
     gap: 14px;
   }
   .logo_cell img {
-    max-height: 46px;
+    max-height: 62px;
   }
   .form_row3,
   .form_row2 {
