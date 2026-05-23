@@ -1576,17 +1576,17 @@ h2 {
 
 .logo_wall {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 20px;
-  max-width: 1100px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 18px;
+  max-width: 1200px;
   margin: 0 auto 56px;
 }
 
 .logo_cell {
   display: grid;
   place-items: center;
-  aspect-ratio: 3 / 2;
-  padding: 16px 18px;
+  aspect-ratio: 16 / 10;
+  padding: 12px 14px;
   border: 1px solid var(--line);
   border-radius: 14px;
   background: rgba(255,255,255,0.025);
@@ -1601,7 +1601,7 @@ h2 {
 
 .logo_cell img {
   max-width: 100%;
-  max-height: 78px;
+  max-height: 104px;
   width: auto;
   height: auto;
   object-fit: contain;
@@ -2157,7 +2157,7 @@ h2 {
     grid-template-columns: 1fr;
   }
   .logo_wall {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .footer_grid {
     grid-template-columns: repeat(2, 1fr);
@@ -2201,11 +2201,11 @@ h2 {
     grid-template-columns: 1fr;
   }
   .logo_wall {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px;
   }
   .logo_cell img {
-    max-height: 62px;
+    max-height: 80px;
   }
   .form_row3,
   .form_row2 {
