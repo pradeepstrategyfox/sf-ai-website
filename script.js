@@ -51,8 +51,16 @@
   }
 
   /* ---------- animated counters ---------- */
+  function fmtNum(n, decimals) {
+    var s = decimals > 0 ? n.toFixed(decimals) : String(Math.round(n));
+    var parts = s.split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
+  }
   function animateCount(el) {
-    var target = parseFloat(el.getAttribute("data-count")) || 0;
+    var raw = el.getAttribute("data-count") || "0";
+    var target = parseFloat(raw) || 0;
+    var decimals = raw.indexOf(".") > -1 ? raw.split(".")[1].length : 0;
     var prefix = el.getAttribute("data-prefix") || "";
     var suffix = el.getAttribute("data-suffix") || "";
     var dur = 1300, start = null;
@@ -60,20 +68,33 @@
       if (!start) start = ts;
       var p = Math.min((ts - start) / dur, 1);
       var eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = prefix + Math.round(target * eased) + suffix;
+      el.textContent = prefix + fmtNum(target * eased, decimals) + suffix;
       if (p < 1) requestAnimationFrame(step);
-      else el.textContent = prefix + target + suffix;
+      else el.textContent = prefix + fmtNum(target, decimals) + suffix;
     }
     requestAnimationFrame(step);
+    // safety net: if rAF is throttled (e.g. background tab), still show the final value
+    setTimeout(function () {
+      el.textContent = prefix + fmtNum(target, decimals) + suffix;
+    }, dur + 500);
   }
   var counters = document.querySelectorAll("[data-count]");
+  function triggerCount(el) {
+    if (el.dataset.cdone) return;
+    el.dataset.cdone = "1";
+    animateCount(el);
+  }
   if ("IntersectionObserver" in window && !reduceMotion) {
     var cObs = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
-        if (en.isIntersecting) { animateCount(en.target); cObs.unobserve(en.target); }
+        if (en.isIntersecting) { triggerCount(en.target); cObs.unobserve(en.target); }
       });
-    }, { threshold: 0.6 });
-    counters.forEach(function (el) { cObs.observe(el); });
+    }, { threshold: 0.25 });
+    counters.forEach(function (el) {
+      cObs.observe(el);
+      var r = el.getBoundingClientRect();
+      if (r.top < (window.innerHeight || 0) && r.bottom > 0) triggerCount(el);
+    });
   } else {
     counters.forEach(function (el) {
       el.textContent = (el.getAttribute("data-prefix") || "") + el.getAttribute("data-count") + (el.getAttribute("data-suffix") || "");
@@ -82,7 +103,7 @@
 
   /* ---------- hero rotator ---------- */
   var words = [
-    "scattered data", "missed sales calls", "invisible search presence",
+    "scattered data", "missed sales calls", "invisible presence",
     "a boring Shopify store", "guesswork marketing", "no real community"
   ];
   var rotWrap = document.querySelector(".rotator");
@@ -107,57 +128,51 @@
   var tallyNum = document.getElementById("tallyNum");
   var tallyFill = document.getElementById("tallyFill");
   var tallyMsg = document.getElementById("tallyMsg");
-  var picked = 0;
+  var revealed = 0;
   var msgs = {
-    0: "Tap the cards below 👇",
-    low: "A few cracks. We seal them fast.",
-    mid: "This is the norm, and exactly our zone.",
-    high: "You're not alone. We close every one of these."
+    0: "Tap a card to reveal how we fix it 👇",
+    low: "Keep going, there's a fix for each one.",
+    mid: "See the pattern? A fix for every gap.",
+    full: "That's all 8. We close every one of these gaps."
   };
   function updateTally() {
-    if (tallyNum) tallyNum.textContent = picked;
-    if (tallyFill) tallyFill.style.width = (picked / 8 * 100) + "%";
+    if (tallyNum) tallyNum.textContent = revealed;
+    if (tallyFill) tallyFill.style.width = (revealed / 8 * 100) + "%";
     if (tallyMsg) {
-      if (picked === 0) tallyMsg.textContent = msgs[0];
-      else if (picked <= 2) tallyMsg.textContent = msgs.low;
-      else if (picked <= 5) tallyMsg.textContent = msgs.mid;
-      else tallyMsg.textContent = msgs.high;
-      tallyMsg.style.color = picked === 0 ? "" : "#d9a9f4";
+      if (revealed === 0) tallyMsg.textContent = msgs[0];
+      else if (revealed <= 3) tallyMsg.textContent = msgs.low;
+      else if (revealed < 8) tallyMsg.textContent = msgs.mid;
+      else tallyMsg.textContent = msgs.full;
+      tallyMsg.style.color = revealed === 0 ? "" : "#d9a9f4";
     }
   }
   flips.forEach(function (card) {
-    var front = card.querySelector(".flip_front");
-    // flip on card click
     card.addEventListener("click", function () {
+      var wasFlipped = card.classList.contains("flipped");
+      card.classList.remove("hint");
       card.classList.toggle("flipped");
-    });
-    // mark "that's me" via the icon area (front), without flipping
-    if (front) {
-      front.addEventListener("click", function (e) {
-        // shift/long handled by separate pick button? keep simple: dblclick to pick
-      });
-    }
-    // double click toggles "picked"
-    card.addEventListener("dblclick", function (e) {
-      e.preventDefault();
-      card.classList.toggle("picked");
-      picked += card.classList.contains("picked") ? 1 : -1;
-      updateTally();
+      if (!wasFlipped && !card.dataset.counted) {
+        card.dataset.counted = "1";
+        revealed += 1;
+        updateTally();
+      }
     });
   });
 
-  // Provide an explicit pick affordance: a small tap on the tag toggles pick
-  document.querySelectorAll(".flip_front .diag_tag").forEach(function (tag) {
-    tag.style.cursor = "pointer";
-    tag.title = "Mark this as yours";
-    tag.addEventListener("click", function (e) {
-      e.stopPropagation();
-      var card = tag.closest(".flip");
-      card.classList.toggle("picked");
-      picked += card.classList.contains("picked") ? 1 : -1;
-      updateTally();
-    });
-  });
+  // one-time flip hint: gently wiggle the first card when it enters view
+  var firstFlip = flips[0];
+  if (firstFlip && "IntersectionObserver" in window && !reduceMotion) {
+    var hintObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          firstFlip.classList.add("hint");
+          setTimeout(function () { firstFlip.classList.remove("hint"); }, 3000);
+          hintObs.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.6 });
+    hintObs.observe(firstFlip);
+  }
 
   /* ---------- chat sequence helper ---------- */
   function runSequence(container, steps, opts) {
@@ -261,13 +276,13 @@
   var dataSets = [
     {
       q: "Best seller in Chennai yesterday?",
-      kpi: "Sweet Karam Coffee · Filter Decoction",
+      kpi: "True Diamond · Solitaire Ring",
       sub: "Top product · Chennai · yesterday",
       bars: [
-        ["Filter Decoction", 100, "₹71,400"],
-        ["Sukku Coffee", 68, "₹48,500"],
-        ["Millet Mix", 41, "₹29,200"],
-        ["Snack Box", 27, "₹19,300"]
+        ["Solitaire Ring", 100, "₹2,40,000"],
+        ["Diamond Studs", 71, "₹1,70,000"],
+        ["Tennis Bracelet", 48, "₹1,15,000"],
+        ["Eternity Band", 33, "₹78,000"]
       ]
     },
     {
@@ -346,6 +361,7 @@
   var tgs = document.querySelectorAll(".tg");
   var tgHead = document.querySelector(".toggle_head");
   var panels = document.querySelectorAll(".toggle_panel");
+  var toggleHint = document.getElementById("toggleHint");
   tgs.forEach(function (btn) {
     btn.addEventListener("click", function () {
       var side = btn.getAttribute("data-side");
@@ -354,6 +370,8 @@
       panels.forEach(function (pn) {
         pn.classList.toggle("active", pn.getAttribute("data-panel") === side);
       });
+      document.querySelectorAll(".tg.pulse").forEach(function (b) { b.classList.remove("pulse"); });
+      if (toggleHint) toggleHint.classList.add("done");
     });
   });
 
