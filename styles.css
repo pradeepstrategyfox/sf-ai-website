@@ -1736,6 +1736,205 @@ h2 {
   color: #fff;
 }
 
+/* EDGE */
+.edge {
+  padding: 110px 0;
+  border-top: 1px solid var(--line_soft);
+}
+
+.edge_grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.edge_grid article {
+  padding: 30px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+.edge_grid i {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin-bottom: 18px;
+  border-radius: 12px;
+  background: rgba(166,69,220,0.14);
+  color: #d9a9f4;
+  font-size: 20px;
+  font-style: normal;
+}
+
+.edge_grid h3 {
+  margin-bottom: 12px;
+}
+
+.edge_grid p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.edge_case {
+  margin-top: 18px;
+  padding: 26px 30px;
+  border: 1px solid rgba(126,220,229,0.28);
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(126,220,229,0.08), rgba(255,255,255,0.02));
+}
+
+.edge_case_tag {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(126,220,229,0.18);
+  color: #aef0f6;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.edge_case p {
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+.edge_case em {
+  color: #aef0f6;
+  font-style: italic;
+}
+
+.trend_spotlight {
+  margin-top: 18px;
+  padding: 32px;
+  border: 1px solid rgba(166,69,220,0.35);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 92% 0%, rgba(166,69,220,0.2), transparent 45%),
+    linear-gradient(180deg, rgba(166,69,220,0.1), rgba(255,255,255,0.02));
+}
+
+.trend_head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.trend_badge {
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--grad);
+  color: #0c0712;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.trend_head h3 {
+  font-size: 22px;
+}
+
+.trend_spotlight p {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.trend_spotlight .trend_cta {
+  margin-top: 14px;
+  color: #e7c4fb;
+}
+
+/* CONTACT FORM */
+.lead_form {
+  max-width: 760px;
+  margin: 36px auto 0;
+  text-align: left;
+}
+
+.form_row3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.form_row2 {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px;
+  margin-top: 14px;
+  align-items: stretch;
+}
+
+.lead_form input,
+.lead_form textarea {
+  width: 100%;
+  padding: 15px 18px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+  font: inherit;
+  font-size: 16px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.lead_form textarea {
+  resize: vertical;
+  min-height: 58px;
+}
+
+.lead_form input::placeholder,
+.lead_form textarea::placeholder {
+  color: var(--quiet);
+}
+
+.lead_form input:focus,
+.lead_form textarea:focus {
+  outline: none;
+  border-color: rgba(166,69,220,0.6);
+  background: rgba(255,255,255,0.06);
+}
+
+.form_row2 .pill_btn {
+  white-space: nowrap;
+  height: 100%;
+}
+
+.form_status {
+  margin-top: 14px;
+  min-height: 20px;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.form_status.ok {
+  color: #8fe6b0;
+}
+
+.form_status.err {
+  color: #f0a8c2;
+}
+
+.form_alt {
+  margin-top: 20px;
+  color: var(--quiet);
+  font-size: 15px;
+}
+
+.form_alt a {
+  color: #c875ff;
+}
+
 /* RESPONSIVE */
 @media (max-width: 1080px) {
   .diag_grid {
@@ -1798,6 +1997,7 @@ h2 {
   .demos,
   .different,
   .products,
+  .edge,
   .proof,
   .final_cta {
     padding: 76px 0;
@@ -1808,8 +2008,17 @@ h2 {
   .flip {
     height: 344px;
   }
-  .product_grid {
+  .product_grid,
+  .edge_grid {
     grid-template-columns: 1fr;
+  }
+  .form_row3,
+  .form_row2 {
+    grid-template-columns: 1fr;
+  }
+  .trend_spotlight,
+  .edge_case {
+    padding: 24px;
   }
   .hero_stats {
     margin-top: 44px;

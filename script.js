@@ -389,4 +389,57 @@
       });
     });
   }
+
+  /* ---------- contact form ---------- */
+  var leadForm = document.getElementById("leadForm");
+  if (leadForm) {
+    var status = document.getElementById("formStatus");
+    var submitBtn = document.getElementById("leadSubmit");
+    var EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+    function setStatus(msg, kind) {
+      if (!status) return;
+      status.textContent = msg;
+      status.className = "form_status" + (kind ? " " + kind : "");
+    }
+    leadForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var data = new FormData(leadForm);
+      var name = (data.get("name") || "").toString().trim();
+      var email = (data.get("email") || "").toString().trim();
+      var phone = (data.get("phone") || "").toString().trim();
+      if (!name || !email || !phone) {
+        setStatus("Please fill in your name, email and phone number.", "err");
+        return;
+      }
+      if (!EMAIL_RE.test(email)) {
+        setStatus("Please enter a valid email address.", "err");
+        return;
+      }
+      data.append("_subject", "New enquiry from Strategy Fox website");
+      data.append("_captcha", "false");
+      data.append("_template", "table");
+      if (submitBtn) { submitBtn.disabled = true; }
+      setStatus("Sending…", "");
+      fetch("https://formsubmit.co/ajax/dev.foxbusinessconsulting@gmail.com", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: data
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (res) {
+          if (res && (res.success === "true" || res.success === true)) {
+            leadForm.reset();
+            setStatus("Thanks! We've got your message and will be in touch shortly.", "ok");
+          } else {
+            setStatus("Something went wrong. Please email pradeep@strategyfox.in.", "err");
+          }
+        })
+        .catch(function () {
+          setStatus("Something went wrong. Please email pradeep@strategyfox.in.", "err");
+        })
+        .finally(function () {
+          if (submitBtn) { submitBtn.disabled = false; }
+        });
+    });
+  }
 })();
