@@ -1264,14 +1264,14 @@ h2 {
 }
 
 .product_tile {
-  display: block;
-  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 18px;
   background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.018));
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
   transition: transform 0.2s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-  transform-style: preserve-3d;
 }
 
 .product_tile:hover {
@@ -1279,17 +1279,76 @@ h2 {
   box-shadow: 0 22px 60px rgba(0,0,0,0.45);
 }
 
-.product_tile i {
-  width: 52px;
-  height: 52px;
+.product_cover {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #11111a;
+  border-bottom: 1px solid var(--line);
+}
+
+.product_cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.55s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.product_tile:hover .product_cover img {
+  transform: scale(1.07);
+}
+
+.product_cover_grad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background:
+    radial-gradient(circle at 30% 25%, rgba(126,220,229,0.4), transparent 55%),
+    linear-gradient(135deg, rgba(166,69,220,0.55), rgba(124,69,255,0.45));
+}
+
+.cover_mono {
+  font-size: 46px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: #fff;
+  text-shadow: 0 4px 24px rgba(0,0,0,0.35);
+}
+
+.cover_label {
+  color: rgba(255,255,255,0.85);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.product_mono {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 36px;
+  height: 36px;
   display: grid;
   place-items: center;
-  border-radius: 14px;
-  background: rgba(255,255,255,0.07);
-  color: #e9e4f5;
+  border-radius: 10px;
+  background: rgba(1,1,6,0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: #fff;
   font-style: normal;
   font-weight: 720;
-  margin-bottom: 22px;
+  font-size: 13px;
+}
+
+.product_body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 24px;
 }
 
 .product_tile h3 {
@@ -1305,12 +1364,13 @@ h2 {
 
 .product_tile p {
   margin-top: 16px;
+  flex: 1;
   color: var(--muted);
   font-size: 15px;
   line-height: 1.65;
 }
 
-.product_tile span {
+.product_link {
   display: inline-flex;
   margin-top: 22px;
   color: #c875ff;
@@ -1633,7 +1693,7 @@ h2 {
     grid-template-columns: 1fr;
   }
   .flip {
-    height: 260px;
+    height: 300px;
   }
   .product_grid {
     grid-template-columns: 1fr;
@@ -1654,6 +1714,80 @@ h2 {
   }
   .cursor_glow {
     display: none;
+  }
+
+  /* larger, more readable body text on mobile */
+  .lead {
+    font-size: 18px;
+  }
+  .hero_text {
+    font-size: 18px;
+  }
+  .hero_stats span {
+    font-size: 14px;
+  }
+  .hero_note {
+    font-size: 14px;
+  }
+  .flip_face h3 {
+    font-size: 19px;
+  }
+  .flip_face p {
+    font-size: 15.5px;
+  }
+  .diag_tag {
+    font-size: 12px;
+  }
+  .flip_cue {
+    font-size: 14px;
+  }
+  .tally_count {
+    font-size: 17px;
+  }
+  .tally_msg {
+    font-size: 15px;
+  }
+  .demo_copy > p {
+    font-size: 17px;
+  }
+  .ticks li {
+    font-size: 16.5px;
+  }
+  .product_tile p {
+    font-size: 16px;
+  }
+  .product_tile small {
+    font-size: 15px;
+  }
+  .toggle_panel li {
+    font-size: 16px;
+  }
+  .capability_row span {
+    font-size: 15px;
+  }
+  .query_pills .qpill {
+    font-size: 15px;
+  }
+  .data_prompt,
+  .dbar {
+    font-size: 14px;
+  }
+  .quote_grid p,
+  .founder_card p {
+    font-size: 17px;
+  }
+  .founder_stats span {
+    font-size: 15px;
+  }
+  .marquee_label {
+    font-size: 15px;
+  }
+  .site_footer p,
+  .site_footer a:not(.brand) {
+    font-size: 16px;
+  }
+  .footer_bottom {
+    font-size: 15px;
   }
 }
 
